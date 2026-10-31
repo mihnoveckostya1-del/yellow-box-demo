@@ -24,7 +24,7 @@ async function loadReceipt() {
     if (version !== loadVersion) return;
     if (!response.ok) throw new Error(data.error || 'Не удалось загрузить запись.');
     const { booking, business, timezone } = data;
-    try { localStorage.setItem('lastBookingUrl', `/yellow-box-demo/booking.html#${token}`); } catch { /* Link still works without storage. */ }
+    try { localStorage.setItem(window.DEMO_BOOKING_KEY || 'lastBookingUrl', `/yellow-box-demo/booking.html#${token}`); } catch { /* Link still works without storage. */ }
     document.querySelector('.receipt-brand').replaceChildren(document.createTextNode(business.name.toLocaleLowerCase()), Object.assign(document.createElement('span'), { textContent: '.' }));
     const [label, note] = statusCopy[booking.status] || ['Статус уточняется', 'Позвоните в сервис для уточнения записи.'];
     state.textContent = label; state.dataset.status = booking.status;

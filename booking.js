@@ -5,7 +5,7 @@ const selectedTime = document.querySelector('#booking-time');
 const message = document.querySelector('#booking-message');
 const phonePattern = /^[+\d()\s-]+$/;
 try {
-  const saved = localStorage.getItem('lastBookingUrl');
+  const saved = localStorage.getItem(window.DEMO_BOOKING_KEY || 'lastBookingUrl');
   const savedUrl = saved ? new URL(saved, location.href) : null;
   if (savedUrl && savedUrl.origin === location.origin && savedUrl.pathname === new URL('booking.html', location.href).pathname && /^#[a-f0-9]{64}$/.test(savedUrl.hash)) {
     document.querySelectorAll('#my-booking-link, #my-booking-mobile').forEach((link) => { link.href = saved; link.hidden = false; });
@@ -66,24 +66,28 @@ async function loadPublicContent() {
     const response = await fetch('/api/content');
     if (!response.ok) return;
     const content = await response.json();
+    const mediaDefaults=window.DEMO_MEDIA_DEFAULTS || {logoImage:'assets/yellow-box-logo.jpg',heroImage:'assets/workshop.jpg'};
     const safeImage = value => typeof value === 'string' && (/^assets\/[\w.-]+\.(jpg|jpeg|png|webp)$/.test(value) || /^https:\/\//.test(value) || /^data:image\/(png|jpeg|webp);base64,/.test(value));
     document.querySelectorAll('.brand-logo').forEach((image) => {
+      image.hidden=content.logoImage?.endsWith('blank.png');
       if (safeImage(content.logoImage)) image.src = content.logoImage;
       image.alt = content.name;
-      image.onerror = () => { image.onerror = null; image.src = 'assets/yellow-box-logo.jpg'; };
+      image.onerror = () => { image.onerror = null; image.src = mediaDefaults.logoImage; };
     });
+    document.querySelectorAll('.brand-name').forEach(node=>node.hidden=Boolean(content.logoImage && !content.logoImage.endsWith('blank.png')));
     const heroPhoto = document.querySelector('#hero-photo');
     if (heroPhoto) {
+      const empty=!content.heroImage || content.heroImage.endsWith('blank.png'); heroPhoto.hidden=empty;
+      const placeholder=document.querySelector('#hero-placeholder');if(placeholder)placeholder.hidden=!empty;
       if (safeImage(content.heroImage)) heroPhoto.src = content.heroImage;
       heroPhoto.alt = content.heroImageAlt || 'Фотография автосервиса';
-      heroPhoto.onerror = () => { heroPhoto.onerror = null; heroPhoto.src = 'assets/workshop.jpg'; };
+      heroPhoto.onerror = () => { heroPhoto.onerror = null; heroPhoto.src = mediaDefaults.heroImage; };
     }
     const photoSource=document.querySelector('.hero-side-bottom > a');
     if (photoSource) photoSource.hidden=Boolean(content.heroImage && content.heroImage!=='assets/workshop.jpg');
     const photoName=document.querySelector('.hero-side-top > span:first-child');if(photoName)photoName.textContent=content.name;
     document.title = `${content.name} — автосервис во Владивостоке`;
-    const brandName = document.querySelector('.brand-name');
-    if (brandName) brandName.replaceChildren(document.createTextNode(content.name.toLocaleLowerCase()), document.createElement('br'), Object.assign(document.createElement('span'), { className: 'brand-dot', textContent: '.' }));
+    document.querySelectorAll('.brand-name').forEach(brandName=>brandName.replaceChildren(document.createTextNode(content.name), Object.assign(document.createElement('span'), { className: 'brand-dot', textContent: '.' })));
     const heroTitle = document.querySelector('#hero-title');
     if (heroTitle) {
       const lower = document.createElement('span'); lower.textContent = content.headlineBottom;
@@ -109,7 +113,7 @@ async function loadPublicContent() {
       if (link.classList.contains('button') || link.closest('.contact-details')) link.textContent = content.phone;
     });
     document.querySelectorAll('a[href^="mailto:"]').forEach((link) => { link.href = `mailto:${content.email}`; link.textContent = content.email; });
-    document.querySelectorAll('a[href*="/yellow-box-demo/directions/points/"]').forEach((link) => { link.href = content.mapUrl; });
+    document.querySelectorAll('a[href*="/directions/points/"]').forEach((link) => { link.href = content.mapUrl; });
     const services = document.querySelector('.service-list');
     if (services && Array.isArray(content.services)) {
       services.replaceChildren(...content.services.map((item, index) => {
@@ -158,7 +162,7 @@ form.addEventListener('submit', async (event) => {
     if (!response.ok) throw new Error(result.error || 'Не удалось создать запись.');
     message.textContent = `Вы записаны на ${new Date(result.startsAt).toLocaleString('ru-RU', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Asia/Vladivostok' })}. Номер записи: ${result.confirmationCode}.`;
     const receiptUrl = `/yellow-box-demo/booking.html#${result.receiptToken}`;
-    try { localStorage.setItem('lastBookingUrl', receiptUrl); } catch { /* Navigation also works without storage. */ }
+    try { localStorage.setItem(window.DEMO_BOOKING_KEY || 'lastBookingUrl', receiptUrl); } catch { /* Navigation also works without storage. */ }
     location.assign(receiptUrl);
   } catch (error) {
     message.textContent = error.message;

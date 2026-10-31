@@ -106,7 +106,8 @@ async function loadSettings() {
 async function loadContent() {
   const content = await api('/api/content');
   const root = new URL('../',location.href);
-  for (const [name,preview,fallback] of [['logoImage','#logo-preview','assets/yellow-box-logo.jpg'],['heroImage','#hero-preview','assets/workshop.jpg']]) {
+  const mediaDefaults=window.DEMO_MEDIA_DEFAULTS || {logoImage:'assets/yellow-box-logo.jpg',heroImage:'assets/workshop.jpg'};
+  for (const [name,preview,fallback] of [['logoImage','#logo-preview',mediaDefaults.logoImage],['heroImage','#hero-preview',mediaDefaults.heroImage]]) {
     $('#content-form').elements[name].value = content[name] || fallback;
     $(preview).src = new URL(content[name] || fallback,root).href;
   }

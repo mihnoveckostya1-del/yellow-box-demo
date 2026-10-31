@@ -1,0 +1,28 @@
+.receipt-page { min-height:100vh; }
+[hidden] { display:none!important; }
+.receipt-header { min-height:90px; padding:20px 5%; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+.receipt-header > a { font-size:13px; font-weight:800; }
+.receipt-header .receipt-brand { font-size:26px; letter-spacing:-.04em; text-decoration:none; }
+.receipt-brand span { color:#746000; }
+.receipt-layout { width:min(1180px,90%); margin:clamp(40px,7vw,100px) auto; display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,6vw,90px); align-items:start; }
+.receipt-intro h1 { margin:15px 0 30px; font-size:clamp(40px,5.8vw,78px); line-height:1.06; letter-spacing:-.04em; }
+.receipt-intro h1 span { color:var(--muted); }
+.receipt-intro p { max-width:36ch; font-size:16px; line-height:1.7; }
+.receipt-intro > a { display:inline-block; margin-top:24px; }
+.receipt-ticket { padding:clamp(24px,4vw,46px); background:#fafaf5; border-top:8px solid var(--yellow); }
+.receipt-state { display:inline-flex; margin:0 0 24px; font-size:13px; font-weight:800; color:#24522e; }
+.receipt-state[data-status="cancelled"],.receipt-state[data-status="no_show"] { color:#853512; }
+.receipt-ticket h2 { margin:0; font-size:22px; letter-spacing:-.02em; }
+.receipt-code { font-size:12px; color:var(--muted); }
+.receipt-when { display:grid; gap:5px; margin:28px 0; padding:22px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums; }
+.receipt-when strong { font-size:28px; letter-spacing:-.02em; }
+.receipt-when > span { font-size:64px; line-height:1.2; font-weight:800; letter-spacing:-.04em; }
+.receipt-when small { font-size:12px; color:var(--muted); }
+.receipt-facts { margin:0; display:grid; gap:15px; }
+.receipt-facts > div { display:grid; grid-template-columns:100px 1fr; gap:12px; font-size:13px; line-height:1.6; }
+.receipt-facts dt { color:var(--muted); }.receipt-facts dd { margin:0; overflow-wrap:anywhere; }
+.receipt-note { margin:25px 0; font-size:13px; line-height:1.7; }
+.receipt-actions { display:flex; flex-wrap:wrap; gap:10px; }.receipt-actions .button { min-height:46px; padding:12px 16px; font-size:11px; border:0; cursor:pointer; }
+.receipt-map { background:var(--yellow); }.receipt-feedback,.receipt-link-note { font-size:11px; line-height:1.7; }.receipt-link-note { color:var(--muted); margin-top:20px; }
+#receipt-link-wrap label { font-size:12px; } #receipt-link { width:100%; padding:12px; margin-top:8px; border:1px solid var(--line); background:white; font:inherit; font-size:12px; }
+@media(max-width:760px) { .receipt-layout { grid-template-columns:1fr; gap:24px; }.receipt-intro h1 { font-size:46px; }.receipt-intro p { max-width:100%; }.receipt-intro > a { margin-top:4px; }.receipt-header { min-height:72px; }.receipt-header .receipt-brand { font-size:21px; }.receipt-when > span { font-size:56px; } }

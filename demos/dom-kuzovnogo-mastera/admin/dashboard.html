@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet"><title>Записи — панель владельца</title>
+  <link rel="stylesheet" href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/styles.css?v=05840ebb3c56"><link rel="stylesheet" href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/admin/admin.css?v=05840ebb3c56"><script type="module" src="/yellow-box-demo/demos/dom-kuzovnogo-mastera/admin/admin.js?v=05840ebb3c56"></script>
+<script src="/yellow-box-demo/demos/dom-kuzovnogo-mastera/demo-content.js?v=05840ebb3c56"></script><script src="/yellow-box-demo/demos/dom-kuzovnogo-mastera/demo-runtime.js?v=05840ebb3c56"></script></head>
+<body class="dashboard-page">
+  <header class="dash-header"><a class="dash-brand" href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/">Дом Кузовного Мастера <span>· ВЛАДЕЛЕЦ</span></a><div><a href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/" target="_blank" rel="noreferrer">Открыть сайт ↗</a><button id="logout-button" class="quiet">Выйти</button></div></header>
+  <main class="dashboard-wrap">
+    <div class="dash-heading"><div><h1>Всё по местам<span>.</span></h1><p class="dash-description">Записи клиентов, расписание сервиса и информация на сайте.</p></div><p id="admin-message" class="message" role="status" aria-live="polite"></p></div>
+    <nav class="dash-nav" aria-label="Разделы панели"><a href="#appointments">Записи</a><a href="#schedule">Расписание</a><a href="#content">Тексты и услуги</a></nav>
+    <section id="appointments" class="panel-section">
+      <div class="section-title"><div><h2>Записи клиентов</h2><p class="section-description">Время визита, контакты и всё, что нужно мастеру.</p></div><label class="date-filter">Показать за дату<input id="booking-filter-date" type="date"></label></div>
+      <div id="booking-list" class="booking-list" aria-live="polite">Загружаем записи…</div>
+      <details class="subpanel"><summary>Добавить запись вручную</summary>
+        <form id="manual-booking-form" class="admin-form grid-form">
+          <label>Имя<input name="name" minlength="2" required></label><label>Телефон<input name="phone" type="tel" required></label>
+          <label>Автомобиль<input name="vehicle"></label><label>Проблема<input name="problem"></label>
+          <label>Дата<input name="date" type="date" required></label><label>Время<input name="time" type="time" required></label>
+          <button class="primary" type="submit">Добавить запись</button>
+        </form>
+      </details>
+      <details class="subpanel"><summary>Закрыть время для записи</summary>
+        <form id="block-form" class="admin-form grid-form">
+          <label>Дата<input name="date" type="date" required></label><label>С<input name="from" type="time" required></label><label>До<input name="to" type="time" required></label>
+          <label>Причина<input name="reason" maxlength="300"></label><button class="primary" type="submit">Закрыть интервал</button>
+        </form><div id="blocked-list" class="blocked-list"></div>
+      </details>
+    </section>
+    <section id="schedule" class="panel-section">
+      <div class="section-title"><div><h2>Расписание</h2><p class="section-description">Когда сервис принимает клиентов и сколько длится один визит.</p></div></div>
+      <form id="settings-form" class="admin-form">
+        <div class="settings-row"><label>Длительность визита, минут<input name="slotMinutes" type="number" min="15" max="480" step="15" required></label><label>Запись вперёд, дней<input name="horizonDays" type="number" min="1" max="90" required></label><label>Минимум до визита, минут<input name="leadMinutes" type="number" min="0" max="10080" required></label></div>
+        <h3>Часы работы по дням недели</h3><div id="hours-editor" class="hours-editor"></div>
+        <button class="primary" type="submit">Сохранить расписание</button>
+      </form>
+    </section>
+    <section id="content" class="panel-section">
+      <div class="section-title"><div><h2>Информация на сайте</h2><p class="section-description">Контакты, услуги и цены, которые увидят ваши клиенты.</p></div></div>
+      <form id="content-form" class="admin-form">
+        <div class="media-editor">
+          <label>Логотип сервиса<img id="logo-preview" class="media-preview logo-preview" src="../assets/blank.png?v=05840ebb3c56" alt="Предпросмотр логотипа" width="240" height="100"><input name="logoImage" type="hidden"><input id="logo-upload" type="file" accept="image/jpeg,image/png,image/webp"><small>PNG, JPEG или WebP, до 5 МБ. Изображение будет уменьшено автоматически.</small></label>
+          <label>Фото первого экрана<img id="hero-preview" class="media-preview" src="../assets/blank.png?v=05840ebb3c56" alt="Предпросмотр фото первого экрана" width="320" height="200"><input name="heroImage" type="hidden"><input id="hero-upload" type="file" accept="image/jpeg,image/png,image/webp"><small>Выберите своё фото сервиса. Затем нажмите «Сохранить сведения».</small></label>
+        </div>
+        <label>Описание фотографии для незрячих посетителей<input name="heroImageAlt" maxlength="250" placeholder="Например: автомобиль на диагностическом стенде"></label>
+        <div class="settings-row"><label>Название<input name="name" required maxlength="100"></label><label>Телефон<input name="phone" required maxlength="40"></label><label>Ссылка телефона, цифры<input name="phoneHref" required maxlength="40"></label></div>
+        <div class="settings-row"><label>Электронная почта<input name="email" type="email" maxlength="150"></label><label>Ссылка на карту<input name="mapUrl" type="url" maxlength="500"></label></div>
+        <div class="settings-row"><label>Первая строка заголовка<input name="headlineTop" maxlength="100"></label><label>Вторая строка заголовка<input name="headlineBottom" maxlength="100"></label><label>График на сайте<input name="hoursLabel" maxlength="100"></label></div>
+        <label>Краткое описание<textarea name="description" maxlength="500" rows="2"></textarea></label>
+        <div class="settings-row"><label>Адрес<input name="address" maxlength="200"></label></div>
+        <div class="service-heading"><h3>Услуги и отображаемые цены</h3><button id="add-service" class="quiet" type="button">+ Добавить</button></div>
+        <div id="services-editor" class="services-editor"></div>
+        <button class="primary" type="submit">Сохранить сведения</button>
+      </form>
+    </section>
+    <footer class="dash-footer">Сайт пока работает локально. Перед публичным запуском нужно согласовать размещение и политику хранения данных.</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet"><title>Вход владельца — MuscleCar Service</title>
+  <link rel="stylesheet" href="/yellow-box-demo/demos/musclecar-service/styles.css?v=05840ebb3c56"><link rel="stylesheet" href="/yellow-box-demo/demos/musclecar-service/admin/admin.css?v=05840ebb3c56">
+<script src="/yellow-box-demo/demos/musclecar-service/demo-content.js?v=05840ebb3c56"></script><script src="/yellow-box-demo/demos/musclecar-service/demo-runtime.js?v=05840ebb3c56"></script><style>.login-tabs,#login-form,#setup-form{display:none!important}</style></head>
+<body class="login-page">
+  <main class="login-card"><p>Демонстрационная панель. Вход без пароля; все записи — примеры.</p><a class="primary" href="/yellow-box-demo/demos/musclecar-service/admin/dashboard.html">Открыть демо-панель</a>
+    <a class="admin-back" href="/yellow-box-demo/demos/musclecar-service/">← На сайт</a>
+    <h1>Ваш сервис<span>.</span><br>Под контролем.</h1><p class="hint">Посмотрите, как можно управлять визитами и информацией на сайте.</p>
+    <div class="login-tabs"><button type="button" id="login-tab" class="active">Войти</button><button type="button" id="setup-tab">Первый вход</button></div>
+    <form id="login-form">
+      <label>Логин<input name="username" autocomplete="username" required></label>
+      <label>Пароль<input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">Войти</button>
+    </form>
+    <form id="setup-form" hidden>
+      <p class="hint">Первый владелец создаёт учётную запись по ключу ADMIN_SETUP_TOKEN из файла .env. После создания этот путь закрывается.</p>
+      <label>Ключ первичной настройки<input name="setupToken" type="password" autocomplete="off" required></label>
+      <label>Логин<input name="username" autocomplete="username" minlength="3" maxlength="40" required></label>
+      <label>Пароль<input name="password" type="password" autocomplete="new-password" minlength="12" required></label>
+      <button class="primary" type="submit">Создать владельца</button>
+    </form>
+    <p id="login-message" class="message" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>

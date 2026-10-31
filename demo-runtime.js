@@ -1,6 +1,6 @@
 (() => {
   const nativeFetch = window.fetch.bind(window);
-  const storageKey = 'yellow-box-pages-demo-v1';
+  const storageKey = window.DEMO_STORAGE_KEY || 'yellow-box-pages-demo-v1';
   const tomorrow = new Date(Date.now()+86400000).toLocaleDateString('en-CA',{timeZone:'Asia/Vladivostok'});
   const initial = {
     content:window.DEMO_CONTENT,

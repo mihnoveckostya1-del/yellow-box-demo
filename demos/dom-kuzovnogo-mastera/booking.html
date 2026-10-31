@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet"><meta name="referrer" content="no-referrer">
+  <title>Моя запись — Дом Кузовного Мастера</title>
+  <link rel="stylesheet" href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/styles.css?v=05840ebb3c56"><link rel="stylesheet" href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/receipt.css?v=05840ebb3c56">
+  <script src="/yellow-box-demo/demos/dom-kuzovnogo-mastera/receipt.js?v=05840ebb3c56" defer></script>
+<link rel="stylesheet" href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/business.css?v=05840ebb3c56"><script src="/yellow-box-demo/demos/dom-kuzovnogo-mastera/demo-content.js?v=05840ebb3c56"></script><script src="/yellow-box-demo/demos/dom-kuzovnogo-mastera/demo-runtime.js?v=05840ebb3c56"></script></head>
+<body class="receipt-page">
+  <header class="receipt-header"><a href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/" class="receipt-brand">Дом Кузовного Мастера<span>.</span></a><a href="/yellow-box-demo/demos/dom-kuzovnogo-mastera/">На сайт</a></header>
+  <main class="receipt-layout">
+    <section class="receipt-intro"><h1>Ваш визит.<br><span>Всё под рукой.</span></h1><p>Дата, время и статус записи — на одной странице. Сохраните ссылку, чтобы вернуться сюда позже.</p><a id="receipt-call" class="text-link" hidden>Связаться с сервисом</a></section>
+    <section class="receipt-ticket" aria-labelledby="receipt-title" aria-busy="true">
+      <p id="receipt-state" class="receipt-state" role="status" aria-live="polite">Загружаем запись…</p>
+      <div id="receipt-details" hidden>
+        <h2 id="receipt-title">Визит на диагностику</h2><p id="receipt-code" class="receipt-code"></p>
+        <div class="receipt-when"><strong id="receipt-date"></strong><span id="receipt-time"></span><small id="receipt-zone"></small></div>
+        <dl class="receipt-facts"><div><dt>Автосервис</dt><dd id="receipt-business"></dd></div><div><dt>Адрес</dt><dd id="receipt-address"></dd></div><div id="receipt-vehicle-row"><dt>Автомобиль</dt><dd id="receipt-vehicle"></dd></div></dl>
+        <p id="receipt-status-note" class="receipt-note"></p>
+        <div class="receipt-actions"><button id="copy-receipt" class="button button-dark" type="button">Сохранить ссылку</button><a id="receipt-map" class="button receipt-map" target="_blank" rel="noreferrer">Построить маршрут</a></div>
+        <p id="receipt-feedback" class="receipt-feedback" role="status" aria-live="polite"></p>
+        <div id="receipt-link-wrap" hidden><label for="receipt-link">Ваша ссылка на запись</label><input id="receipt-link" readonly></div>
+        <p class="receipt-link-note">Ссылка открывает сведения о вашем визите. Сохраните её у себя. После переноса время на этой странице обновится.</p>
+      </div>
+      <button id="receipt-retry" class="button button-dark" type="button" hidden>Повторить загрузку</button>
+    </section>
+  </main>
+</body>
+</html>
