@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="theme-color" content="#f0d13b">
+    <meta name="description" content="Демо-сайт автосервиса «Желтый бокс» во Владивостоке. Диагностика, ремонт и обслуживание автомобиля.">
+    <title>Желтый бокс — автосервис во Владивостоке</title>
+    <link rel="stylesheet" href="styles.css">
+  <script src="/yellow-box-demo/demo-content.js"></script><script src="/yellow-box-demo/demo-runtime.js"></script></head>
+  <body>
+    <div class="demo-note" role="note">
+      <span>Демо-концепт · не официальный сайт</span>
+      <a href="https://2gis.ru/vladivostok/firm/3518965489870483" target="_blank" rel="noreferrer">Исходные данные в 2ГИС <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Желтый бокс — на главную">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">желтый<br>бокс<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Основная навигация">
+        <a id="my-booking-link" hidden>Моя запись</a>
+        <a href="#services">Услуги</a>
+        <a href="#prices">Цены</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a class="header-phone" href="tel:+74232992929">+7 (423) 2-99-29-29</a>
+      <a class="menu-call" href="tel:+74232992929" aria-label="Позвонить в автосервис">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2c1.1.4 2.2.6 3.4.6a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.5 21 3 13.5 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.3.6 3.4a1 1 0 0 1-.2 1z"/yellow-box-demo/></svg>
+      </a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="location-tag"><span class="status-dot"></span> Владивосток · Сельская, 6а</p>
+          <h1 id="hero-title">Сначала<br>разберёмся.<br><span>Потом починим.</span></h1>
+          <p class="hero-description">Диагностика, ремонт ходовой и техническое обслуживание автомобиля.</p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="#booking">Записаться на диагностику <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://2gis.ru/vladivostok/directions/points/%7C131.940455%2C43.132997%3B3518965489870483" target="_blank" rel="noreferrer">Построить маршрут <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-meta">
+            <span><strong>09:00—20:00</strong><small>ежедневно</small></span>
+            <span><strong>4,9</strong><small>рейтинг в 2ГИС</small></span>
+          </div>
+        </div>
+        <div class="hero-side" aria-label="Информация об автосервисе">
+          <div class="hero-side-top"><span>СТО</span><span>ВЛАДИВОСТОК</span></div>
+          <div class="hero-graphic" aria-hidden="true">
+            <div class="graphic-ring ring-one"></div>
+            <div class="graphic-ring ring-two"></div>
+            <div class="graphic-cross cross-one"></div>
+            <div class="graphic-cross cross-two"></div>
+            <span class="graphic-number">6<span>а</span></span>
+            <span class="graphic-label">СЕЛЬСКАЯ<br>УЛИЦА</span>
+          </div>
+          <div class="hero-side-bottom"><span>АВТОСЕРВИС</span><span>РАБОТАЕМ КАЖДЫЙ ДЕНЬ</span></div>
+        </div>
+        <div class="hero-edge" aria-hidden="true">РЕМОНТ · ДИАГНОСТИКА · ОБСЛУЖИВАНИЕ</div>
+      </section>
+
+      <section class="booking-section" id="booking" aria-labelledby="booking-title">
+        <div class="booking-intro">
+          <a id="my-booking-mobile" hidden>Открыть мою запись</a>
+          <p class="booking-kicker">ВЫБЕРИТЕ УДОБНОЕ ВРЕМЯ</p>
+          <h2 id="booking-title">Запись<br>на диагностику.</h2>
+          <p>Выберите свободное время визита. Стоимость и объём работ мастер определит после осмотра.</p>
+          <a href="tel:+74232992929">Или позвоните: +7 (423) 2-99-29-29</a>
+        </div>
+        <form id="booking-form" class="booking-form">
+          <label>Дата визита<input id="booking-date" name="date" type="date" required></label>
+          <fieldset class="slot-field"><legend>Свободное время</legend><div id="slot-list" class="slot-list" aria-live="polite"><span>Сначала выберите дату</span></div></fieldset>
+          <input id="booking-time" name="time" type="hidden" required>
+          <label>Ваше имя<input name="name" autocomplete="name" minlength="2" maxlength="100" required></label>
+          <label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" minlength="7" maxlength="30" required></label>
+          <label>Автомобиль <span class="optional">необязательно</span><input name="vehicle" maxlength="160" placeholder="Марка и модель"></label>
+          <label>Что беспокоит? <span class="optional">необязательно</span><textarea name="problem" maxlength="1000" rows="3" placeholder="Коротко опишите проблему"></textarea></label>
+          <button class="button button-dark booking-submit" type="submit">Подтвердить запись <span aria-hidden="true">↗</span></button>
+          <p id="booking-message" class="booking-message" role="status" aria-live="polite"></p>
+          <small>Нажимая кнопку, вы отправляете данные для оформления записи. Публичное размещение сайта и сбор заявок нужно отдельно согласовать.</small>
+        </form>
+      </section>
+
+      <section class="service-line" aria-label="Основные направления">
+        <span>Компьютерная диагностика</span><i></i>
+        <span>Вибростенд</span><i></i>
+        <span>Ремонт ходовой</span><i></i>
+        <span>Замена масла</span>
+      </section>
+
+      <section class="intro section-wrap" id="services">
+        <div class="section-index"><span>01</span><span>Чем поможем</span></div>
+        <div class="intro-main">
+          <h2>Диагностика<br>и ремонт.</h2>
+          <p>В карточке сервиса указаны диагностика на вибростенде, ремонт ходовой части, техническое обслуживание и другие работы.</p>
+          <a class="arrow-link" href="#prices">Услуги и цены <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="service-list">
+          <a href="#prices"><span class="service-no">01</span><span class="service-title">Диагностика ходовой</span><span class="service-arrow" aria-hidden="true">↗</span></a>
+          <a href="#prices"><span class="service-no">02</span><span class="service-title">Компьютерная диагностика</span><span class="service-arrow" aria-hidden="true">↗</span></a>
+          <a href="#prices"><span class="service-no">03</span><span class="service-title">Ремонт подвески</span><span class="service-arrow" aria-hidden="true">↗</span></a>
+          <a href="#prices"><span class="service-no">04</span><span class="service-title">Замена масла и фильтров</span><span class="service-arrow" aria-hidden="true">↗</span></a>
+          <a href="#prices"><span class="service-no">05</span><span class="service-title">Тормозная система</span><span class="service-arrow" aria-hidden="true">↗</span></a>
+          <a href="#prices"><span class="service-no">06</span><span class="service-title">Двигатель и трансмиссия</span><span class="service-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="proof-strip">
+        <div class="proof-copy">
+          <span class="proof-mark">ЖБ / 01</span>
+          <p>Диагностика ходовой части на вибростенде указана в карточке 2ГИС. Возможность и стоимость работы уточняйте по телефону.</p>
+          <a href="tel:+74232992929">Спросить о диагностике <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="proof-stamp"><span>ДИАГНОСТИКА</span><strong>V<br>STAND</strong><small>2ГИС · ИНФО</small></div>
+      </section>
+
+      <section class="prices section-wrap" id="prices">
+        <div class="section-index"><span>02</span><span>Прайс-лист 2ГИС</span></div>
+        <div class="prices-heading">
+          <h2>Цены на работы</h2>
+          <p>Стоимость зависит от автомобиля и объёма работ. Цены приведены по карточке 2ГИС; уточните актуальную сумму перед записью.</p>
+        </div>
+        <div class="price-list">
+          <div class="price-row"><span class="price-name">Диагностика ходовой на вибростенде</span><span class="price-dots"></span><strong>1 900 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Диагностика электрооборудования сканером</span><span class="price-dots"></span><strong>от 1 200 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена масла в двигателе</span><span class="price-dots"></span><strong>от 800 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена масла в АКПП</span><span class="price-dots"></span><strong>от 1 200 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена амортизатора</span><span class="price-dots"></span><strong>2 000–5 000 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена втулок стабилизатора</span><span class="price-dots"></span><strong>1 500–2 500 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена колодок</span><span class="price-dots"></span><strong>1 500–3 500 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Проточка тормозных дисков</span><span class="price-dots"></span><strong>от 3 000 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена свечей зажигания</span><span class="price-dots"></span><strong>от 2 000 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена двигателя</span><span class="price-dots"></span><strong>от 18 000 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Замена АКПП / МКПП</span><span class="price-dots"></span><strong>от 18 000 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Ремонт рулевой рейки</span><span class="price-dots"></span><strong>от 18 000 ₽</strong></div>
+          <div class="price-row"><span class="price-name">Перепрессовка сайлентблоков в рычаге</span><span class="price-dots"></span><strong>от 3 000 ₽</strong></div>
+        </div>
+        <a class="price-source" href="https://2gis.ru/vladivostok/firm/3518965489870483/tab/prices" target="_blank" rel="noreferrer">Сверить прайс в 2ГИС <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="gallery-section">
+        <div class="gallery-text">
+          <div class="section-index"><span>03</span><span>Фото сервиса</span></div>
+          <h2>Загляните<br>в бокс.</h2>
+          <p>Фотографии автосервиса доступны в его карточке 2ГИС.</p>
+          <a class="button button-yellow" href="https://2gis.ru/vladivostok/gallery/firm/3518965489870483" target="_blank" rel="noreferrer">Открыть галерею <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="gallery-panel">
+          <span class="gallery-count">33<br><small>ФОТО</small></span>
+          <span class="gallery-label">ЖЕЛТЫЙ<br>БОКС</span>
+          <span class="gallery-link-icon" aria-hidden="true">↗</span>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contacts">
+        <div class="contact-top">
+          <div class="section-index"><span>04</span><span>Как нас найти</span></div>
+          <a href="https://2gis.ru/vladivostok/directions/points/%7C131.940455%2C43.132997%3B3518965489870483" target="_blank" rel="noreferrer">Маршрут в 2ГИС <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-main">
+          <div class="contact-address">
+            <h2>Приезжайте<br>на Сельскую.</h2>
+            <p>Владивосток, Сельская улица, 6а<br>Первореченский район · 1 этаж</p>
+            <a class="button button-dark" href="https://2gis.ru/vladivostok/directions/points/%7C131.940455%2C43.132997%3B3518965489870483" target="_blank" rel="noreferrer">Построить маршрут <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="contact-details">
+            <div><span>Телефон</span><a href="tel:+74232992929">+7 (423) 2-99-29-29</a></div>
+            <div><span>Почта</span><a href="mailto:priemzakazov@ybvl.ru">priemzakazov@ybvl.ru</a></div>
+            <div><span>График</span><strong>Ежедневно · 09:00–20:00</strong></div>
+            <div class="messenger-links"><span>Написать</span><a href="https://wa.me/79046292929" target="_blank" rel="noreferrer">WhatsApp ↗</a><a href="https://t.me/+79046292929" target="_blank" rel="noreferrer">Telegram ↗</a></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-name">желтый<br>бокс<span class="brand-dot">.</span></span></a>
+      <p>Демо-концепт для просмотра владельцем.<br>Не официальный сайт автосервиса.</p>
+      <a href="https://2gis.ru/vladivostok/firm/3518965489870483" target="_blank" rel="noreferrer">Карточка в 2ГИС ↗</a>
+      <span class="footer-mark">ВЛАДИВОСТОК · 2026</span>
+    </footer>
+
+    <a class="mobile-call" href="#booking"><span class="call-icon" aria-hidden="true">↗</span> Записаться на диагностику</a>
+    <script src="/yellow-box-demo/booking.js" defer></script>
+  </body>
+</html>
