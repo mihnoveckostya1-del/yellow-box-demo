@@ -62,7 +62,7 @@ async function loadBookings() {
     status.value = booking.status;
     status.addEventListener('change', async () => {
       try { await api(`/api/admin/bookings/${booking.id}`, { method: 'PATCH', body: JSON.stringify({ status: status.value }) }); message('Статус записи сохранён.'); await loadBookings(); }
-      catch (error) { message(error.message, true); }
+      catch (error) { status.value=booking.status; message(error.message, true); }
     });
     const date = document.createElement('input'); date.type = 'date'; date.value = formatDate(booking.starts_at).slice(-10).split('.').reverse().join('-'); date.setAttribute('aria-label', 'Новая дата');
     // ISO conversion keeps the date independent of the viewer locale.
@@ -105,6 +105,12 @@ async function loadSettings() {
 
 async function loadContent() {
   const content = await api('/api/content');
+  const root = new URL('../',location.href);
+  for (const [name,preview,fallback] of [['logoImage','#logo-preview','assets/yellow-box-logo.jpg'],['heroImage','#hero-preview','assets/workshop.jpg']]) {
+    $('#content-form').elements[name].value = content[name] || fallback;
+    $(preview).src = new URL(content[name] || fallback,root).href;
+  }
+  $('#content-form').elements.heroImageAlt.value = content.heroImageAlt || 'Фотография автосервиса';
   const brand = $('.dash-brand'); if (brand) { brand.replaceChildren(document.createTextNode(content.name), element('span', '', 'ПАНЕЛЬ ВЛАДЕЛЬЦА')); }
   const form = $('#content-form');
   for (const key of ['name', 'headlineTop', 'headlineBottom', 'phone', 'phoneHref', 'email', 'mapUrl', 'description', 'address', 'hoursLabel']) form.elements[key].value = content[key] || '';
@@ -169,6 +175,7 @@ $('#content-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   const form = event.currentTarget;
   const content = Object.fromEntries(['name', 'headlineTop', 'headlineBottom', 'phone', 'phoneHref', 'email', 'mapUrl', 'description', 'address', 'hoursLabel'].map((key) => [key, form.elements[key].value]));
+  for (const key of ['logoImage','heroImage','heroImageAlt']) content[key] = form.elements[key].value;
   content.services = [...$('#services-editor').querySelectorAll('.service-row')].map((row) => ({ name: row.children[0].value.trim(), price: row.children[1].value.trim() }));
   if (content.services.some((service) => !service.name || !service.price)) { message('Заполните название и цену каждой услуги.', true); return; }
   try { await api('/api/admin/content', { method: 'PUT', body: JSON.stringify(content) }); message('Сведения сохранены.'); }
@@ -179,6 +186,22 @@ $('#logout-button').addEventListener('click', async () => {
   try { await api('/api/auth/logout', { method: 'POST', body: '{}' }); location.href = '/yellow-box-demo/admin/login.html'; }
   catch (error) { message(error.message, true); }
 });
+
+for (const [id,name,preview] of [['#logo-upload','logoImage','#logo-preview'],['#hero-upload','heroImage','#hero-preview']]) {
+  $(id).addEventListener('change',async (event) => {
+    const file = event.target.files[0]; if (!file) return;
+    if (!['image/jpeg','image/png','image/webp'].includes(file.type) || file.size > 5*1024*1024) { message('Выберите PNG, JPEG или WebP размером до 5 МБ.',true); event.target.value=''; return; }
+    try {
+      const bitmap = await createImageBitmap(file);
+      const scale = Math.min(1,(name==='logoImage'?700:1400)/bitmap.width,(name==='logoImage'?400:1000)/bitmap.height);
+      const canvas=document.createElement('canvas'); canvas.width=Math.max(1,Math.round(bitmap.width*scale)); canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+      canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height); bitmap.close();
+      const value=canvas.toDataURL(name==='logoImage'?'image/png':'image/jpeg',.82);
+      if (value.length>900000) throw new Error('Изображение слишком сложное. Выберите файл меньшего размера.');
+      $('#content-form').elements[name].value=value; $(preview).src=value; message('Изображение подготовлено. Нажмите «Сохранить сведения».');
+    } catch(error) { message(error.message || 'Не удалось открыть изображение.',true); }
+  });
+}
 
 try {
   const me = await api('/api/auth/me'); csrfToken = me.csrfToken;

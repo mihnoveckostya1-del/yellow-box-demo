@@ -7,8 +7,8 @@
     <meta name="theme-color" content="#f0d13b">
     <meta name="description" content="Демо-сайт автосервиса «Желтый бокс» во Владивостоке. Диагностика, ремонт и обслуживание автомобиля.">
     <title>Желтый бокс — автосервис во Владивостоке</title>
-    <link rel="stylesheet" href="styles.css">
-  <script src="/yellow-box-demo/demo-content.js"></script><script src="/yellow-box-demo/demo-runtime.js"></script></head>
+    <link rel="stylesheet" href="styles.css?v=f09324613cb8">
+  <script src="/yellow-box-demo/demo-content.js?v=f09324613cb8"></script><script src="/yellow-box-demo/demo-runtime.js?v=f09324613cb8"></script></head>
   <body>
     <div class="demo-note" role="note">
       <span>Демо-концепт · не официальный сайт</span>
@@ -17,8 +17,7 @@
 
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Желтый бокс — на главную">
-        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-        <span class="brand-name">желтый<br>бокс<span class="brand-dot">.</span></span>
+        <img class="brand-logo" src="assets/yellow-box-logo.jpg?v=f09324613cb8" alt="Желтый бокс — автосервис" width="489" height="177">
       </a>
       <nav class="main-nav" aria-label="Основная навигация">
         <a id="my-booking-link" hidden>Моя запись</a>
@@ -48,16 +47,9 @@
           </div>
         </div>
         <div class="hero-side" aria-label="Информация об автосервисе">
-          <div class="hero-side-top"><span>СТО</span><span>ВЛАДИВОСТОК</span></div>
-          <div class="hero-graphic" aria-hidden="true">
-            <div class="graphic-ring ring-one"></div>
-            <div class="graphic-ring ring-two"></div>
-            <div class="graphic-cross cross-one"></div>
-            <div class="graphic-cross cross-two"></div>
-            <span class="graphic-number">6<span>а</span></span>
-            <span class="graphic-label">СЕЛЬСКАЯ<br>УЛИЦА</span>
-          </div>
-          <div class="hero-side-bottom"><span>АВТОСЕРВИС</span><span>РАБОТАЕМ КАЖДЫЙ ДЕНЬ</span></div>
+          <div class="hero-side-top"><span>ЖЕЛТЫЙ БОКС</span><span>ВЛАДИВОСТОК</span></div>
+          <figure class="hero-photo-frame"><img id="hero-photo" src="assets/workshop.jpg?v=f09324613cb8" alt="Автомобиль на диагностическом стенде в автосервисе «Желтый бокс»" width="800" height="534" fetchpriority="high"><figcaption>Здесь начинается диагностика.</figcaption></figure>
+          <div class="hero-side-bottom"><span>ДИАГНОСТИКА И ОБСЛУЖИВАНИЕ</span><a href="https://ybvl.ru/gallery/" target="_blank" rel="noreferrer">Фото сервиса ↗</a></div>
         </div>
         <div class="hero-edge" aria-hidden="true">РЕМОНТ · ДИАГНОСТИКА · ОБСЛУЖИВАНИЕ</div>
       </section>
@@ -177,13 +169,13 @@
     </main>
 
     <footer class="site-footer">
-      <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span class="brand-name">желтый<br>бокс<span class="brand-dot">.</span></span></a>
+      <a class="brand footer-brand" href="#top"><img class="brand-logo" src="assets/yellow-box-logo.jpg?v=f09324613cb8" alt="Желтый бокс — на главную" width="489" height="177" loading="lazy"></a>
       <p>Демо-концепт для просмотра владельцем.<br>Не официальный сайт автосервиса.</p>
       <a href="https://2gis.ru/vladivostok/firm/3518965489870483" target="_blank" rel="noreferrer">Карточка в 2ГИС ↗</a>
       <span class="footer-mark">ВЛАДИВОСТОК · 2026</span>
     </footer>
 
     <a class="mobile-call" href="#booking"><span class="call-icon" aria-hidden="true">↗</span> Записаться на диагностику</a>
-    <script src="/yellow-box-demo/booking.js" defer></script>
+    <script src="/yellow-box-demo/booking.js?v=f09324613cb8" defer></script>
   </body>
 </html>

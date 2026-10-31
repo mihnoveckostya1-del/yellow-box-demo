@@ -13,10 +13,12 @@ try {
 } catch { /* Saved links are optional when storage is unavailable. */ }
 
 function dateString(date) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Vladivostok',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
 }
 
+let slotsVersion = 0;
 async function loadSlots() {
+  const version = ++slotsVersion;
   selectedTime.value = '';
   slotsBox.replaceChildren();
   if (!dateInput.value) {
@@ -27,6 +29,9 @@ async function loadSlots() {
   try {
     const response = await fetch(`/api/availability?date=${encodeURIComponent(dateInput.value)}`);
     const data = await response.json();
+    if (version !== slotsVersion) return;
+    if (data.minDate) dateInput.min = data.minDate;
+    if (data.maxDate) dateInput.max = data.maxDate;
     if (!response.ok) throw new Error(data.error || 'Не удалось загрузить свободное время.');
     slotsBox.replaceChildren();
     if (!data.slots.length) {
@@ -51,6 +56,7 @@ async function loadSlots() {
       slotsBox.append(button);
     }
   } catch (error) {
+    if (version !== slotsVersion) return;
     slotsBox.textContent = error.message;
   }
 }
@@ -60,6 +66,21 @@ async function loadPublicContent() {
     const response = await fetch('/api/content');
     if (!response.ok) return;
     const content = await response.json();
+    const safeImage = value => typeof value === 'string' && (/^assets\/[\w.-]+\.(jpg|jpeg|png|webp)$/.test(value) || /^https:\/\//.test(value) || /^data:image\/(png|jpeg|webp);base64,/.test(value));
+    document.querySelectorAll('.brand-logo').forEach((image) => {
+      if (safeImage(content.logoImage)) image.src = content.logoImage;
+      image.alt = content.name;
+      image.onerror = () => { image.onerror = null; image.src = 'assets/yellow-box-logo.jpg'; };
+    });
+    const heroPhoto = document.querySelector('#hero-photo');
+    if (heroPhoto) {
+      if (safeImage(content.heroImage)) heroPhoto.src = content.heroImage;
+      heroPhoto.alt = content.heroImageAlt || 'Фотография автосервиса';
+      heroPhoto.onerror = () => { heroPhoto.onerror = null; heroPhoto.src = 'assets/workshop.jpg'; };
+    }
+    const photoSource=document.querySelector('.hero-side-bottom > a');
+    if (photoSource) photoSource.hidden=Boolean(content.heroImage && content.heroImage!=='assets/workshop.jpg');
+    const photoName=document.querySelector('.hero-side-top > span:first-child');if(photoName)photoName.textContent=content.name;
     document.title = `${content.name} — автосервис во Владивостоке`;
     const brandName = document.querySelector('.brand-name');
     if (brandName) brandName.replaceChildren(document.createTextNode(content.name.toLocaleLowerCase()), document.createElement('br'), Object.assign(document.createElement('span'), { className: 'brand-dot', textContent: '.' }));
@@ -69,7 +90,7 @@ async function loadPublicContent() {
       heroTitle.replaceChildren(document.createTextNode(content.headlineTop), document.createElement('br'), lower);
     }
     const phoneHref = `tel:${content.phoneHref}`;
-    document.querySelectorAll('.header-phone, .menu-call, .mobile-call').forEach((node) => node.href = phoneHref);
+    document.querySelectorAll('.header-phone, .menu-call').forEach((node) => node.href = phoneHref);
     const headerPhone = document.querySelector('.header-phone');
     if (headerPhone) headerPhone.textContent = content.phone;
     const heroAddress = document.querySelector('.location-tag');
@@ -79,6 +100,8 @@ async function loadPublicContent() {
     const contactRows = document.querySelectorAll('.contact-details > div');
     const hoursRow = [...contactRows].find((row) => row.firstElementChild?.textContent === 'График');
     if (hoursRow?.lastElementChild) hoursRow.lastElementChild.textContent = content.hoursLabel;
+    const heroHours = document.querySelector('.hero-meta > span:first-child');
+    if (heroHours) { heroHours.querySelector('strong').textContent = content.hoursLabel; heroHours.querySelector('small').textContent = 'график работы'; }
     const description = document.querySelector('.hero-description');
     if (description) description.textContent = content.description;
     document.querySelectorAll('a[href^="tel:"]').forEach((link) => {

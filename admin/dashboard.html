@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet"><title>Записи — панель владельца</title>
-  <link rel="stylesheet" href="/yellow-box-demo/styles.css"><link rel="stylesheet" href="/yellow-box-demo/admin/admin.css"><script type="module" src="/yellow-box-demo/admin/admin.js"></script>
-<script src="/yellow-box-demo/demo-content.js"></script><script src="/yellow-box-demo/demo-runtime.js"></script></head>
+  <link rel="stylesheet" href="/yellow-box-demo/styles.css?v=f09324613cb8"><link rel="stylesheet" href="/yellow-box-demo/admin/admin.css?v=f09324613cb8"><script type="module" src="/yellow-box-demo/admin/admin.js?v=f09324613cb8"></script>
+<script src="/yellow-box-demo/demo-content.js?v=f09324613cb8"></script><script src="/yellow-box-demo/demo-runtime.js?v=f09324613cb8"></script></head>
 <body class="dashboard-page">
   <header class="dash-header"><a class="dash-brand" href="/yellow-box-demo/">ЖЕЛТЫЙ БОКС <span>· ВЛАДЕЛЕЦ</span></a><div><a href="/yellow-box-demo/" target="_blank" rel="noreferrer">Открыть сайт ↗</a><button id="logout-button" class="quiet">Выйти</button></div></header>
   <main class="dashboard-wrap">
@@ -39,6 +39,11 @@
     <section id="content" class="panel-section">
       <div class="section-title"><div><h2>Информация на сайте</h2><p class="section-description">Контакты, услуги и цены, которые увидят ваши клиенты.</p></div></div>
       <form id="content-form" class="admin-form">
+        <div class="media-editor">
+          <label>Логотип сервиса<img id="logo-preview" class="media-preview logo-preview" src="../assets/yellow-box-logo.jpg?v=f09324613cb8" alt="Предпросмотр логотипа" width="240" height="100"><input name="logoImage" type="hidden"><input id="logo-upload" type="file" accept="image/jpeg,image/png,image/webp"><small>PNG, JPEG или WebP, до 5 МБ. Изображение будет уменьшено автоматически.</small></label>
+          <label>Фото первого экрана<img id="hero-preview" class="media-preview" src="../assets/workshop.jpg?v=f09324613cb8" alt="Предпросмотр фото первого экрана" width="320" height="200"><input name="heroImage" type="hidden"><input id="hero-upload" type="file" accept="image/jpeg,image/png,image/webp"><small>Выберите своё фото сервиса. Затем нажмите «Сохранить сведения».</small></label>
+        </div>
+        <label>Описание фотографии для незрячих посетителей<input name="heroImageAlt" maxlength="250" placeholder="Например: автомобиль на диагностическом стенде"></label>
         <div class="settings-row"><label>Название<input name="name" required maxlength="100"></label><label>Телефон<input name="phone" required maxlength="40"></label><label>Ссылка телефона, цифры<input name="phoneHref" required maxlength="40"></label></div>
         <div class="settings-row"><label>Электронная почта<input name="email" type="email" maxlength="150"></label><label>Ссылка на карту<input name="mapUrl" type="url" maxlength="500"></label></div>
         <div class="settings-row"><label>Первая строка заголовка<input name="headlineTop" maxlength="100"></label><label>Вторая строка заголовка<input name="headlineBottom" maxlength="100"></label><label>График на сайте<input name="hoursLabel" maxlength="100"></label></div>
